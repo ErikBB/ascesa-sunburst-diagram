@@ -67,19 +67,19 @@ function buildHierarchy(data) {
   return result;
 }
 
-// ✅ Critical: dscc only exists in Looker Studio
-if (typeof dscc !== "undefined") {
-  dscc.subscribeToData(drawViz, { transform: dscc.tableTransform });
-} else {
-  const mockData = {
-    tables: {
-      DEFAULT: [
-        { dimensions: ["Europe", "Norway", "Oslo"], metrics: [10] },
-        { dimensions: ["Europe", "Norway", "Bergen"], metrics: [5] },
-        { dimensions: ["Europe", "Sweden", "Stockholm"], metrics: [8] },
-        { dimensions: ["Asia", "Japan", "Tokyo"], metrics: [12] }
-      ]
-    }
-  };
-  drawViz(mockData);
-}
+// Wrap ALL dscc in one safe block
+(function () {
+  if (typeof dscc !== "undefined") {
+    dscc.subscribeToData(drawViz, { transform: dscc.tableTransform });
+  } else {
+    const mockData = {
+      tables: {
+        DEFAULT: [
+          { dimensions: ["Europe", "Norway", "Oslo"], metrics: [10] },
+          { dimensions: ["Europe", "Norway", "Bergen"], metrics: [5] },
+          { dimensions: ["Europe", "Sweden", "Stockholm"], metrics: [8] },
+          { dimensions: ["Asia", "Japan", "Tokyo"], metrics: [12] }
+        ]
+      }
+    };
+    drawViz
