@@ -1,5 +1,3 @@
-const dscc = require('dscc');
-
 function drawViz(data) {
   const container = document.getElementById('sunburst');
   container.innerHTML = ''; // Clear on redraw
