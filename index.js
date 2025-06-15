@@ -67,15 +67,26 @@ function buildHierarchy(data) {
   return result;
 }
 
-// NO dscc anywhere – only local testing with mock data
-const mockData = {
-  tables: {
-    DEFAULT: [
-      { dimensions: ["Europe", "Norway", "Oslo"], metrics: [10] },
-      { dimensions: ["Europe", "Norway", "Bergen"], metrics: [5] },
-      { dimensions: ["Europe", "Sweden", "Stockholm"], metrics: [8] },
-      { dimensions: ["Asia", "Japan", "Tokyo"], metrics: [12] }
-    ]
+// Only use dscc if it exists (Looker Studio)
+(function () {
+  try {
+    if (typeof dscc !== "undefined" && dscc.subscribeToData) {
+      dscc.subscribeToData(drawViz, { transform: dscc.tableTransform });
+    } else {
+      throw new Error("dscc not found, using mock data");
+    }
+  } catch (e) {
+    console.warn("Using mock data:", e.message);
+    const mockData = {
+      tables: {
+        DEFAULT: [
+          { dimensions: ["Europe", "Norway", "Oslo"], metrics: [10] },
+          { dimensions: ["Europe", "Norway", "Bergen"], metrics: [5] },
+          { dimensions: ["Europe", "Sweden", "Stockholm"], metrics: [8] },
+          { dimensions: ["Asia", "Japan", "Tokyo"], metrics: [12] }
+        ]
+      }
+    };
+    drawViz(mockData);
   }
-};
-drawViz(mockData);
+})();
