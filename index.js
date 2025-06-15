@@ -85,3 +85,4 @@ if (typeof dscc !== "undefined") {
   };
   drawViz(mockData);
 }
+
