@@ -67,12 +67,10 @@ function buildHierarchy(data) {
   return result;
 }
 
-// Looker Studio or standalone browser fallback
+// ✅ Critical: dscc only exists in Looker Studio
 if (typeof dscc !== "undefined") {
-  // In Looker Studio environment
   dscc.subscribeToData(drawViz, { transform: dscc.tableTransform });
 } else {
-  // Fallback for browser testing
   const mockData = {
     tables: {
       DEFAULT: [
@@ -85,4 +83,3 @@ if (typeof dscc !== "undefined") {
   };
   drawViz(mockData);
 }
-
