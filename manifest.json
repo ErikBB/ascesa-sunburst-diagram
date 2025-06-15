@@ -1,0 +1,22 @@
+{
+  "dataStudio": {
+    "name": "Ascesa Sunburst Diagram",
+    "company": "ErikBB",
+    "supportUrl": "https://github.com/ErikBB/ascesa-sunburst-diagram",
+    "description": "Custom sunburst chart using D3.js for Looker Studio",
+    "devMode": true
+  },
+  "components": {
+    "visualizations": [
+      {
+        "id": "sunburst",
+        "label": "Sunburst Chart",
+        "style": "style.css",
+        "script": "index.js",
+        "template": "index.html",
+        "usesData": true,
+        "defaultHeight": 400
+      }
+    ]
+  }
+}
