@@ -68,3 +68,18 @@ function buildHierarchy(data) {
 }
 
 dscc.subscribeToData(drawViz, { transform: dscc.tableTransform });
+
+if (typeof dscc === "undefined") {
+  // We're outside Looker Studio – use mock data
+  const mockData = {
+    tables: {
+      DEFAULT: [
+        { dimensions: ["Europe", "Norway", "Oslo"], metrics: [10] },
+        { dimensions: ["Europe", "Norway", "Bergen"], metrics: [5] },
+        { dimensions: ["Europe", "Sweden", "Stockholm"], metrics: [8] },
+        { dimensions: ["Asia", "Japan", "Tokyo"], metrics: [12] }
+      ]
+    }
+  };
+  drawViz(mockData);
+}
