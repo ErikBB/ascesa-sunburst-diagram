@@ -67,10 +67,12 @@ function buildHierarchy(data) {
   return result;
 }
 
-dscc.subscribeToData(drawViz, { transform: dscc.tableTransform });
-
-if (typeof dscc === "undefined") {
-  // We're outside Looker Studio – use mock data
+// Looker Studio or standalone browser fallback
+if (typeof dscc !== "undefined") {
+  // In Looker Studio environment
+  dscc.subscribeToData(drawViz, { transform: dscc.tableTransform });
+} else {
+  // Fallback for browser testing
   const mockData = {
     tables: {
       DEFAULT: [
